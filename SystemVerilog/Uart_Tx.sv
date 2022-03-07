@@ -1,6 +1,7 @@
 /*
 Module Name: Uart_Tx
 Language: System Verilog
+Author: Justin Killam
 Description: Uart Transmitter with parameterized
 data width, and baud rate. Format 1 start, DW data,
 1 stop, and no parity.
@@ -22,9 +23,9 @@ Outputs:
 
 Module Instantiation Skeleton:
 	Uart_Tx #(
-			.DW(8),
-			.SYS_FREQ(100000000),
-			.BAUD_FREQ(9600)
+			.DW(),
+			.SYS_FREQ(),
+			.BAUD_FREQ()
 		)Name(
 			.clk(),
 			.rst(),

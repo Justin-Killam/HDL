@@ -2,6 +2,7 @@
 /*
 Module Name: Uart_Rx
 Language: System Verilog
+Author: Justin Killam
 Description: Uart Reciever with parameterized
 data width, and baud rate. Format 1 start, DW data,
 1 stop, and no parity.
