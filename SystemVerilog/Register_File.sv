@@ -23,21 +23,21 @@ Module Instantiation Skeleton:
 */
 
 module Register_File #(
-parameter AWL=5,
+parameter AWL=8,
 parameter DWL=32,
 parameter MODE=0
 )(
-input clk,
-input wen,
-input [AWL-1:0]RA1,
-input [AWL-1:0]RA2,
-input [AWL-1:0]WA,
-input [DWL-1:0]WD,
-output logic [DWL-1:0]RD1,
-output logic [DWL-1:0]RD2
+    input clk,
+    input wen,
+    input [AWL-1:0]RA1,
+    input [AWL-1:0]RA2,
+    input [AWL-1:0]WA,
+    input [DWL-1:0]WD,
+    output logic [DWL-1:0]RD1,
+    output logic [DWL-1:0]RD2
 );
 
-	reg [DWL-1:0]rf_ram[0:2**AWL-1];
+	logic [DWL-1:0]rf_ram[0:2**AWL-1];
 	assign rf_ram[0]=0;
 	
 	generate

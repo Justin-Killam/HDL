@@ -1,0 +1,12 @@
+
+
+RAM256X1S #(
+.INIT(256’d0),
+.IS_WCLK_INVERTED(1’b0) // Specifies active high/low WCLK
+) Ram (
+.O(), // Read/write port 1-bit output
+.A(), // Read/write port 8-bit address input
+.WE(), // Write enable input
+.WCLK(), // Write clock input
+.D() // RAM data input
+);
