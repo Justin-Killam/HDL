@@ -23,7 +23,7 @@ Module Instantiation Skeleton:
 */
 
 module Register_File #(
-parameter AWL=8,
+parameter AWL=5,
 parameter DWL=32,
 parameter MODE=0
 )(
