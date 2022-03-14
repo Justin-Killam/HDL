@@ -1,5 +1,21 @@
 `timescale 1ns/1ps
 
+/*
+
+MIPS_Opcode_Decoder Inst_Name (
+.Opcode(),
+.RFWE(),
+.RFDSel(),
+.ALUInSel(),
+.Branch(),
+.DMWE(),
+.MroRFSel(),
+.Jump(),
+.ALUOp()
+);
+
+*/
+
 module MIPS_Opcode_Decoder(
 (
 input [5:0]Opcode,
