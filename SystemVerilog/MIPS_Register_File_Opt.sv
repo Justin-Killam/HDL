@@ -5,9 +5,8 @@ Module Name: MIPS_Register_File.sv
 Language: System Verilog
 Author: Justin Killam
 Description: A register file intended to be used with a MIPS or
-MIPS based system. The module has the ability to be used in 3
-modes either asynchronous read, write first, or read first using
-a mode parameter.
+MIPS based system. This register file reads asynchronously, and
+is resource optimized using the RAM32M Ultrascale primitive.
 
 Parameters:
 	AWL: Address word length
@@ -32,7 +31,7 @@ Outputs:
 	RD2: Read port 2 Data output.
 
 Module Instantiation Skeleton:
-	MIPS_Register_File #(
+	MIPS_Register_File_Opt #(
 		.AWL(),
 		.DWL()
 	)Inst_Name(

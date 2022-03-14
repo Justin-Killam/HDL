@@ -65,31 +65,41 @@ parameter MODE=0
 );
 
 	logic [DWL-1:0]rf_ram[0:2**AWL-1];
-	assign rf_ram[0]=0;
 	
 	generate
+		//Mode that reads data present before write operation
 		if(MODE==2)begin
 			always_ff @(posedge clk)begin
 				if(wen)rf_ram[WA]<=WD;
+				//Setting position 0 to 0
+				else rf_ram[0]<=0;
 				RD1<=rf_ram[RA1];
 				RD2<=rf_ram[RA2];
 			end
 		end
+		//Mode that reads data present after write operation
 		else if(MODE==1)begin
 			logic [AWL-1:0]RA1Q,RA2Q;
 			always_ff @(posedge clk)begin
 				if(wen)rf_ram[WA]<=WD;
+				//Setting position 0 to 0
+				else rf_ram[0]<=0;
+				//registering the address
 				RA1Q<=RA1;
 				RA2Q<=RA2;
 			end
+			//reading a synchronously from the updated address
 			always_comb begin
 				RD1=rf_ram[RA1Q];
 				RD2=rf_ram[RA2Q];
 			end
 		end
+		//Mode for simple asynchronous reading
 		else begin
 			always_ff @(posedge clk)begin
 				if(wen)rf_ram[WA]<=WD;
+				//Setting position 0 to 0
+				else rf_ram[0]<=0;
 			end
 			always_comb begin
 				RD1=rf_ram[RA1];
