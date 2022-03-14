@@ -22,7 +22,7 @@ Module Instantiation Skeleton:
 
 */
 
-module Register_File #(
+module MIPS_Register_File #(
 parameter AWL=5,
 parameter DWL=32,
 parameter MODE=0

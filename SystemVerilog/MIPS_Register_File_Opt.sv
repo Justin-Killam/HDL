@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module Register_File_Opt #( 
+module MIPS_Register_File_Opt #( 
 parameter AWL=5,
 parameter DWL=32
 )(
