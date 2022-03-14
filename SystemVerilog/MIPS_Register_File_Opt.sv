@@ -1,5 +1,52 @@
 `timescale 1ns/1ps
 
+/*
+Module Name: MIPS_Register_File.sv
+Language: System Verilog
+Author: Justin Killam
+Description: A register file intended to be used with a MIPS or
+MIPS based system. The module has the ability to be used in 3
+modes either asynchronous read, write first, or read first using
+a mode parameter.
+
+Parameters:
+	AWL: Address word length
+
+	DWL: Data word length
+
+Inputs:
+	clk: System clock frequency
+	
+	wen: Write enable signal. If enabled data on port WD is written 
+	to location WA.
+
+	RA1/RA2: Data read address locations for the RD1 and RD2 output ports.
+
+	WA: The address at which WD will be written when wen is active.
+
+	WD: The data to be written to address WA when wen is active.
+
+Outputs:
+	RD1: Read port 1 data output.
+
+	RD2: Read port 2 Data output.
+
+Module Instantiation Skeleton:
+	MIPS_Register_File #(
+		.AWL(),
+		.DWL()
+	)Inst_Name(
+		.clk(),
+		.wen(),
+		.RA1(),
+		.RA2(),
+		.WA(),
+		.WD(),
+		.RD1(),
+		.RD2()
+	);
+*/
+
 module MIPS_Register_File_Opt #( 
 parameter AWL=5,
 parameter DWL=32
