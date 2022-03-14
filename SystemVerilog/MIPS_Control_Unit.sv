@@ -30,4 +30,5 @@ module MIPS_Control_Unit (
     output Jump,
     output [3:0]ALUsel
     );
-)
+
+endmodule
