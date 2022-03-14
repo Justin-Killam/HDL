@@ -1,5 +1,14 @@
 `timescale 1ns/1ps
+/*
 
+Module Instantiation Skeleton:
+    MIPS_ALU_Decoder Inst_Name (
+        .ALU_Op(),
+        .funct(),
+        .ALU_Sel()
+    );
+
+*/
 module MIPS_ALU_Decoder (
 input [1:0]ALU_Op,
 input [5:0]funct,
