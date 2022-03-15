@@ -37,8 +37,8 @@ output logic [3:0]ALU_Sel
 
     always_comb begin
         case(ALU_Op)
-            ADDI:
-            SUBI:
+            ADDI:ADD_Sel;
+            SUBI:SUB_Sel;
             R_Type:case(funct)
                 ADD_Funct:ALU_Sel=ADD_Sel;
                 SUB_Funct:ALU_Sel=SUB_Sel;
