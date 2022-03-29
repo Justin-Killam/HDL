@@ -4,14 +4,13 @@
     package MIPS_SC_Definitions;
 
 
-    //Current Supported Opcodes
+    //Current supported opcodes
     localparam R_Type_Opcode =6'b000000;
     localparam LW_Opcode =6'b100011;
     localparam SW_Opcode =6'b101011;
     localparam BEQ_Opcode =6'b000100;
     localparam ADDI_Opcode =6'b001000;
     localparam J_Opcode =6'b000010;
-
 
     //Control signals for supported opcodes
     //format {control_sigs_t,alu_op}
@@ -22,6 +21,24 @@
     localparam ADDI_Signals = 9'b101000000;
     localparam J_Signals = 9'b000000100;
 
+    //Current supported function codes
+    localparam ADD_Funct=6'b100000;
+    localparam SUB_Funct=6'b100010;
+    localparam SLL_Funct=6'b000000;
+    localparam SLLV_Funct=6'b000100;
+    localparam SRAV_Funct=6'b000111;
+
+    //Current supported alu select signals
+    localparam ADD_ALU_Sel=4'd0;
+    localparam SUB_ALU_Sel=4'd1;
+    localparam SLL_ALU_Sel=4'd2;
+    localparam SLLV_ALU_Sel=4'd4;
+    localparam SRAV_ALU_Sel=4'd6;
+
+    //ALU op parameters
+    localparam ADD_Op=2'b00;
+    localparam SUB_Op=2'b01;
+    localparam R_Type_Op=2'b10;
 
     //Control signal data type
     typedef struct packed{
