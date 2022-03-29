@@ -76,7 +76,7 @@
         r_type_instruction_t r_type_instruction;
         i_type_instruction_t i_type_instruction;
         j_type_instruction_t j_type_instruction;
-    }
+    }mips_instruction_t;
     endpackage
     import MIPS_SC_Definitions :: *;
 `endif
