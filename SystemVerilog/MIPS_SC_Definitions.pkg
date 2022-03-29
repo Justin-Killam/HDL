@@ -1,3 +1,4 @@
+//Header: `include "MIPS_SC_Definitions.pkg"
 `ifndef MIPS_SC_PKG
     `def MIPS_SC_PKG
     package MIPS_SC_Definitions;
@@ -13,6 +14,7 @@
 
 
     //Control signals for supported opcodes
+    //format {control_sigs_t,alu_op}
     localparam R_Type_Signals = 9'b110000010;
     localparam LW_Signals = 9'b101001000;
     localparam SW_Signals = 9'b001010000;
