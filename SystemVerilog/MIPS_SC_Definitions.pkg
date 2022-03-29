@@ -1,0 +1,37 @@
+`ifndef MIPS_SC_PKG
+    `def MIPS_SC_PKG
+    package MIPS_SC_Definitions;
+
+
+    //Current Supported Opcodes
+    localparam R_Type_Opcode =6'b000000;
+    localparam LW_Opcode =6'b100011;
+    localparam SW_Opcode =6'b101011;
+    localparam BEQ_Opcode =6'b000100;
+    localparam ADDI_Opcode =6'b001000;
+    localparam J_Opcode =6'b000010;
+
+
+    //Control signals for supported opcodes
+    localparam R_Type_Signals = 9'b110000010;
+    localparam LW_Signals = 9'b101001000;
+    localparam SW_Signals = 9'b001010000;
+    localparam BEQ_Signals = 9'b000100001;
+    localparam ADDI_Signals = 9'b101000000;
+    localparam J_Signals = 9'b000000100;
+
+
+    //Control signal data type
+    typedef struct packed{
+        logic rfwe;
+        logic rfd_sel;
+        logic alu_in_sel;
+        logic branch;
+        logic dmwe;
+        logic mem_to_rf_sel;
+        logic jump;
+    }control_sigs_t;
+
+    endpackage
+    import MIPS_SC_Definitions :: *;
+`endif

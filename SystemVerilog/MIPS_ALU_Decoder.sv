@@ -17,8 +17,8 @@ output logic [3:0]ALU_Sel
 
 //Parameters for readability
     //ALU Op parameters
-    localparam ADDI=2'b00;
-    localparam SUBI=2'b01;
+    localparam ADD=2'b00;
+    localparam SUB=2'b01;
     localparam R_Type=2'b10;
 
     //Output select signal parameters
@@ -37,8 +37,8 @@ output logic [3:0]ALU_Sel
 
     always_comb begin
         case(ALU_Op)
-            ADDI:ADD_Sel;
-            SUBI:SUB_Sel;
+            ADD:ADD_Sel;
+            SUB:SUB_Sel;
             R_Type:case(funct)
                 ADD_Funct:ALU_Sel=ADD_Sel;
                 SUB_Funct:ALU_Sel=SUB_Sel;
