@@ -51,6 +51,32 @@
         logic jump;
     }control_sigs_t;
 
+    typedef struct packed{
+        logic[5:0]opcode;
+        logic[4:0]rs;
+        logic[4:0]rt;
+        logic[4:0]rd;
+        logic[4:0]shamt;
+        logic[4:0]funct;
+    }r_type_instruction_t;
+
+    typedef struct packed{
+        logic[5:0]opcode;
+        logic[4:0]rs;
+        logic[4:0]rt;
+        logic[15:0]imm;
+    }i_type_instruction_t;
+
+    typedef struct packed{
+        logic[5:0]opcode;
+        logic[25:0]jump_target;
+    }j_type_instruction_t;
+
+    typedef union packed{
+        r_type_instruction_t r_type_instruction;
+        i_type_instruction_t i_type_instruction;
+        j_type_instruction_t j_type_instruction;
+    }
     endpackage
     import MIPS_SC_Definitions :: *;
 `endif

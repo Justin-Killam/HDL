@@ -3,9 +3,9 @@
 
 Module Instantiation Skeleton:
     MIPS_ALU_Decoder Inst_Name (
-        .ALU_Op(),
+        .alu_op(),
         .funct(),
-        .ALU_Sel()
+        .alu_sel()
     );
 
 */
@@ -16,7 +16,6 @@ input [1:0]alu_op,
 input [5:0]funct,
 output logic [3:0]alu_sel
 );
-
     always_comb begin
         case(alu_op)
             ADD_Op:ADD_ALU_Sel;
