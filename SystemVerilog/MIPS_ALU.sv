@@ -1,4 +1,17 @@
 `timescale 1ns/1ps
+
+/*
+MIPS_ALU Inst_Name(
+    .alu_sel(),
+    .data_in1(),
+    .data_in2(),
+    .shamt(),
+    .zero(),
+    .data_out()
+);
+
+*/
+
 `include "MIPS_Generic_Definitions.pkg"
 
 module MIPS_ALU(

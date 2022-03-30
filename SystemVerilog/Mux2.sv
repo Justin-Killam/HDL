@@ -1,4 +1,16 @@
 `timescale 1ns/10ps
+/*
+Mux2 Inst_Name #(
+    .DW()
+)(
+    .sel(),
+    .in_0(),
+    .in_1(),
+    .data_out()
+);
+
+*/
+
 
 module Mux2 #(
     parameter DW=32

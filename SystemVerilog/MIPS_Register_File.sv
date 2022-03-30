@@ -33,11 +33,7 @@ Outputs:
 	RD2: Read port 2 Data output.
 
 Module Instantiation Skeleton:
-	MIPS_Register_File #(
-		.AWL(),
-		.DWL(),
-		.Register_File_Mode()
-	)Inst_Name(
+	MIPS_Register_File Inst_Name(
 		.clk(),
 		.wen(),
 		.RA1(),

@@ -1,5 +1,13 @@
 `timescale 1ns/10ps
 
+/*
+MIPS_Instruction_Rom Inst_Name(
+    .r_addr(),
+    .data_out() 
+);
+*/
+
+
 `include "MIPS_Generic_Definitions.pkg"
 
 module MIPS_Instruction_Rom (

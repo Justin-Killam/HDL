@@ -15,7 +15,11 @@ Outputs:
 
 
 Module Instantiation Skeleton:
-
+MIPS_Control_Unit Inst_Name(
+    .opcode(),
+    .funct(),
+    .control_sigs()
+    );
 */
 `include "MIPS_SC_Definitions.pkg"
 module MIPS_Control_Unit (

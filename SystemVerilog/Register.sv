@@ -1,5 +1,19 @@
 `timescale 1ns/10ps
 
+/*
+Register #(
+    .DW()
+)(
+    .clk(),
+    .rst(),
+    .wen(),
+    .data_in(),
+    .data_out()
+);
+
+*/
+
+
 module Register #(
     parameter DW=32
 )(

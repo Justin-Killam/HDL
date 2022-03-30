@@ -1,5 +1,17 @@
 `timescale 1ns/10ps
 
+/*
+MIPS_Data_Rom Inst_Name(
+    .clk(),
+    .we(),
+    .addr(),
+    .data_in(), 
+    .data_out() 
+);
+
+*/
+
+
 `include "MIPS_Generic_Definitions.pkg"
 
 module MIPS_Data_Rom (
