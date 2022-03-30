@@ -5,13 +5,13 @@ Language: System Verilog
 Author: Justin Killam
 Description: A register file intended to be used with a MIPS or
 MIPS based system. The module has the ability to be used in 3
-modes either asynchronous read, write first, or read first using
-a mode parameter.
+Register_File_Modes either asynchronous read, write first, or read first using
+a Register_File_Mode parameter.
 
 Parameters:
 	AWL: Address word length
 	DWL: Data word length
-	MODE: Register file mode
+	Register_File_Mode: Register file Register_File_Mode
 		0:Asynchronous Read
 		1:Write First
 		2:Read First
@@ -36,7 +36,7 @@ Module Instantiation Skeleton:
 	MIPS_Register_File #(
 		.AWL(),
 		.DWL(),
-		.MODE()
+		.Register_File_Mode()
 	)Inst_Name(
 		.clk(),
 		.wen(),
@@ -49,26 +49,24 @@ Module Instantiation Skeleton:
 	);
 */
 
-module MIPS_Register_File #(
-parameter AWL=5,
-parameter DWL=32,
-parameter MODE=0
-)(
+`include "MIPS_Generic_Definitions.pkg"
+
+module MIPS_Register_File(
     input clk,
     input wen,
-    input [AWL-1:0]RA1,
-    input [AWL-1:0]RA2,
-    input [AWL-1:0]WA,
-    input [DWL-1:0]WD,
-    output logic [DWL-1:0]RD1,
-    output logic [DWL-1:0]RD2
+    input rfa_t RA1,
+    input rfa_t RA2,
+    input rfa_t WA,
+    input [Data_Width-1:0]WD,
+    output logic [Data_Width-1:0]RD1,
+    output logic [Data_Width-1:0]RD2
 );
 
-	logic [DWL-1:0]rf_ram[0:2**AWL-1];
+	logic [Data_Width-1:0]rf_ram[0:31];
 	
 	generate
 		//Mode that reads data present before write operation
-		if(MODE==2)begin
+		if(Register_File_Mode==2)begin
 			always_ff @(posedge clk)begin
 				if(wen)rf_ram[WA]<=WD;
 				//Setting position 0 to 0
@@ -78,8 +76,8 @@ parameter MODE=0
 			end
 		end
 		//Mode that reads data present after write operation
-		else if(MODE==1)begin
-			logic [AWL-1:0]RA1Q,RA2Q;
+		else if(Register_File_Mode==1)begin
+			rfa_t RA1Q,RA2Q;
 			always_ff @(posedge clk)begin
 				if(wen)rf_ram[WA]<=WD;
 				//Setting position 0 to 0
