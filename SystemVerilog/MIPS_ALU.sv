@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "MIPS_SC_Definitions.pkg"
+`include "MIPS_Generic_Definitions.pkg"
 
 module MIPS_ALU(
     input alu_sel_t alu_sel,
@@ -26,7 +26,7 @@ module MIPS_ALU(
             default:data_out='x;
         endcase
     end
-    
+
 
 endmodule
 

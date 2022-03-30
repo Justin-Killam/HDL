@@ -9,7 +9,7 @@ Module Instantiation Skeleton:
     );
 
 */
-`include "MIPS_SC_Definitions.pkg"
+`include "MIPS_Generic_Definitions.pkg"
 
 module MIPS_ALU_Decoder (
 input alu_op_t alu_op,
