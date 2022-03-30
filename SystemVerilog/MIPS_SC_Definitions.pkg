@@ -3,7 +3,16 @@
     `define MIPS_SC_PKG
     package MIPS_SC_Definitions;
 
-    
+    /*                   MIPS Generic Definitions                 */
+    /**************************************************************/
+    localparam Data_Width=32;
+    localparam Instruction_Mem_Addr_Width=8;
+    localparam Instruction_Mem_Depth=2**Instruction_Mem_Addr_Width;
+    localparam Data_Mem_Addr_Width=8;
+    localparam Data_Mem_Depth=2**Data_Mem_Addr_Width;
+
+    typedef logic [4:0] rfa_t;
+
     //Enumerated type for instruction opcodes
     typedef enum logic [5:0]{
          R_Type_Opcode =6'b000000,
@@ -14,6 +23,73 @@
          J_Opcode =6'b000010,
          ERR_Opcode='x
     }opcode_t;
+
+    //Enumerated data type for the function encoding
+    typedef enum logic [5:0]{
+        ADD_Funct=6'b100000,
+        SUB_Funct=6'b100010,
+        SLL_Funct=6'b000000,
+        SLLV_Funct=6'b000100,
+        SRAV_Funct=6'b000111,
+        ERR_Funct='x
+    }function_t;
+
+    typedef enum logic [1:0]{
+         ADD_Op=2'b00,
+         SUB_Op=2'b01,
+         R_Type_Op=2'b10,
+         ERR_Op='x
+    }alu_op_t;
+
+    //Enumerated data type for the alu select signal
+    typedef enum logic [3:0]{
+        ADD_ALU_Sel=4'd0,
+        SUB_ALU_Sel=4'd1,
+        SLL_ALU_Sel=4'd2,
+        SRL_ALU_Sel=4'd3,
+        SLLV_ALU_Sel=4'd4,
+        SRLV_ALU_Sel=4'd5,
+        SRAV_ALU_Sel=4'd6,
+        AND_ALU_Sel=4'd7,
+        OR_ALU_Sel=4'd8,
+        XOR_ALU_Sel=4'd9,
+        XNOR_ALU_Sel=4'd10,
+        ERR_ALU_Sel=4'dx
+    }alu_sel_t;
+
+    //Packed structure for the R type instruction
+    typedef struct packed{
+        opcode_t opcode;
+        rfa_t rs;
+        rfa_t rt;
+        rfa_t rd;
+        logic[4:0]shamt;
+        function_t funct;
+    }r_type_instruction_t;
+    //Packed structure for the I type instruction
+    typedef struct packed{
+        opcode_t opcode;
+        rfa_t rs;
+        rfa_t rt;
+        logic[15:0]imm;
+    }i_type_instruction_t;
+    //Packed structure for the J type instruction
+    typedef struct packed{
+        opcode_t opcode;
+        logic[25:0]jump_target;
+    }j_type_instruction_t;
+
+    //Packed union for the mips instruction
+    typedef union packed{
+        r_type_instruction_t r_type_instruction;
+        i_type_instruction_t i_type_instruction;
+        j_type_instruction_t j_type_instruction;
+    }mips_instruction_t;
+
+    /**************************************************************/
+
+    /*            Architecture Specific Definitions               */
+    /**************************************************************/
     
     //Opcode decoder signal packed structure defined data type
     typedef struct packed{
@@ -26,13 +102,6 @@
         logic jump;
     }opcode_decoder_signal_t;
     
-    typedef enum logic [1:0]{
-         ADD_Op=2'b00,
-         SUB_Op=2'b01,
-         R_Type_Op=2'b10,
-         ERR_Op='x
-    }alu_op_t;
-    
     //Parameters for the opcode decoder signal outputs
     localparam R_Type_Signals = 7'b1100000;
     localparam LW_Signals = 7'b1010010;
@@ -42,64 +111,19 @@
     localparam J_Signals = 7'b0000001;
     localparam ERR_Signals= 7'dx;
 
-    //Enumerated data type for the function encoding
-    typedef enum logic [5:0]{
-        ADD_Funct=6'b100000,
-        SUB_Funct=6'b100010,
-        SLL_Funct=6'b000000,
-        SLLV_Funct=6'b000100,
-        SRAV_Funct=6'b000111,
-        ERR_Funct='x
-    }function_t;
-    
-    //Enumerated data type for the alu select signal
-    typedef enum logic [3:0]{
-        ADD_ALU_Sel=4'd0,
-        SUB_ALU_Sel=4'd1,
-        SLL_ALU_Sel=4'd2,
-        SLLV_ALU_Sel=4'd4,
-        SRAV_ALU_Sel=4'd6,
-        ERR_ALU_Sel=4'dx
-    }alu_sel_t;
-    
     //Packed struct to unify the control unit outputs
     typedef struct packed{
         opcode_decoder_signal_t signals;
         alu_sel_t alu_sel;
     } control_signals_t;
     
+    /**************************************************************/
     
     
     
     
     
-    
-    typedef struct packed{
-        logic[5:0]opcode;
-        logic[4:0]rs;
-        logic[4:0]rt;
-        logic[4:0]rd;
-        logic[4:0]shamt;
-        logic[5:0]funct;
-    }r_type_instruction_t;
 
-    typedef struct packed{
-        logic[5:0]opcode;
-        logic[4:0]rs;
-        logic[4:0]rt;
-        logic[15:0]imm;
-    }i_type_instruction_t;
-
-    typedef struct packed{
-        logic[5:0]opcode;
-        logic[25:0]jump_target;
-    }j_type_instruction_t;
-
-    typedef union packed{
-        r_type_instruction_t r_type_instruction;
-        i_type_instruction_t i_type_instruction;
-        j_type_instruction_t j_type_instruction;
-    }mips_instruction_t;
     endpackage
     import MIPS_SC_Definitions :: *;
 `endif
