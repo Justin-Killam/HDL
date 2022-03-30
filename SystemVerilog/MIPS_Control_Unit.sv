@@ -19,23 +19,22 @@ Module Instantiation Skeleton:
 */
 `include "MIPS_SC_Definitions.pkg"
 module MIPS_Control_Unit (
-    input [5:0]opcode,
-    input [5:0]funct,
-    output control_sigs_t control_sigs,
-    output [3:0]alu_sel
+    input opcode_t opcode,
+    input function_t funct,
+    output control_signals_t control_sigs
     );
 
-    wire [1:0]alu_op;
+    alu_op_t alu_op;
 
     MIPS_Opcode_Decoder Op_Dec (
         .opcode(opcode),
-        .control_sigs(control_sigs),
+        .control_sigs(control_sigs.signals),
         .alu_op(alu_op)
     );
     MIPS_ALU_Decoder ALU_Dec (
         .alu_op(alu_op),
         .funct(funct),
-        .alu_sel(alu_sel)
+        .alu_sel(control_sigs.alu_sel)
     );
 
 

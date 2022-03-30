@@ -1,46 +1,21 @@
 //Header: `include "MIPS_SC_Definitions.pkg"
 `ifndef MIPS_SC_PKG
-    `def MIPS_SC_PKG
+    `define MIPS_SC_PKG
     package MIPS_SC_Definitions;
 
-
-    //Current supported opcodes
-    localparam R_Type_Opcode =6'b000000;
-    localparam LW_Opcode =6'b100011;
-    localparam SW_Opcode =6'b101011;
-    localparam BEQ_Opcode =6'b000100;
-    localparam ADDI_Opcode =6'b001000;
-    localparam J_Opcode =6'b000010;
-
-    //Control signals for supported opcodes
-    //format {control_sigs_t,alu_op}
-    localparam R_Type_Signals = 9'b110000010;
-    localparam LW_Signals = 9'b101001000;
-    localparam SW_Signals = 9'b001010000;
-    localparam BEQ_Signals = 9'b000100001;
-    localparam ADDI_Signals = 9'b101000000;
-    localparam J_Signals = 9'b000000100;
-
-    //Current supported function codes
-    localparam ADD_Funct=6'b100000;
-    localparam SUB_Funct=6'b100010;
-    localparam SLL_Funct=6'b000000;
-    localparam SLLV_Funct=6'b000100;
-    localparam SRAV_Funct=6'b000111;
-
-    //Current supported alu select signals
-    localparam ADD_ALU_Sel=4'd0;
-    localparam SUB_ALU_Sel=4'd1;
-    localparam SLL_ALU_Sel=4'd2;
-    localparam SLLV_ALU_Sel=4'd4;
-    localparam SRAV_ALU_Sel=4'd6;
-
-    //ALU op parameters
-    localparam ADD_Op=2'b00;
-    localparam SUB_Op=2'b01;
-    localparam R_Type_Op=2'b10;
-
-    //Control signal data type
+    
+    //Enumerated type for instruction opcodes
+    typedef enum logic [5:0]{
+         R_Type_Opcode =6'b000000,
+         LW_Opcode =6'b100011,
+         SW_Opcode =6'b101011,
+         BEQ_Opcode =6'b000100,
+         ADDI_Opcode =6'b001000,
+         J_Opcode =6'b000010,
+         ERR_Opcode='x
+    }opcode_t;
+    
+    //Opcode decoder signal packed structure defined data type
     typedef struct packed{
         logic rfwe;
         logic rfd_sel;
@@ -49,15 +24,63 @@
         logic dmwe;
         logic mem_to_rf_sel;
         logic jump;
-    }control_sigs_t;
+    }opcode_decoder_signal_t;
+    
+    typedef enum logic [1:0]{
+         ADD_Op=2'b00,
+         SUB_Op=2'b01,
+         R_Type_Op=2'b10,
+         ERR_Op='x
+    }alu_op_t;
+    
+    //Parameters for the opcode decoder signal outputs
+    localparam R_Type_Signals = 7'b1100000;
+    localparam LW_Signals = 7'b1010010;
+    localparam SW_Signals = 7'b0010100;
+    localparam BEQ_Signals = 7'b0001000;
+    localparam ADDI_Signals = 7'b1010000;
+    localparam J_Signals = 7'b0000001;
+    localparam ERR_Signals= 7'dx;
 
+    //Enumerated data type for the function encoding
+    typedef enum logic [5:0]{
+        ADD_Funct=6'b100000,
+        SUB_Funct=6'b100010,
+        SLL_Funct=6'b000000,
+        SLLV_Funct=6'b000100,
+        SRAV_Funct=6'b000111,
+        ERR_Funct='x
+    }function_t;
+    
+    //Enumerated data type for the alu select signal
+    typedef enum logic [3:0]{
+        ADD_ALU_Sel=4'd0,
+        SUB_ALU_Sel=4'd1,
+        SLL_ALU_Sel=4'd2,
+        SLLV_ALU_Sel=4'd4,
+        SRAV_ALU_Sel=4'd6,
+        ERR_ALU_Sel=4'dx
+    }alu_sel_t;
+    
+    //Packed struct to unify the control unit outputs
+    typedef struct packed{
+        opcode_decoder_signal_t signals;
+        alu_sel_t alu_sel;
+    } control_signals_t;
+    
+    
+    
+    
+    
+    
+    
     typedef struct packed{
         logic[5:0]opcode;
         logic[4:0]rs;
         logic[4:0]rt;
         logic[4:0]rd;
         logic[4:0]shamt;
-        logic[4:0]funct;
+        logic[5:0]funct;
     }r_type_instruction_t;
 
     typedef struct packed{
