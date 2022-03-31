@@ -79,6 +79,7 @@
         rfa_t rt;
         logic[15:0]imm;
     }i_type_instruction_t;
+    
     //Packed structure for the J type instruction
     typedef struct packed{
         opcode_t opcode;

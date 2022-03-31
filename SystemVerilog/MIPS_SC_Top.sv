@@ -35,8 +35,14 @@ module MIPS_SC_Top (
 
     //Control signals
     control_signals_t control_sigs;
+    wire zero;
 
-    wire [Data_Width-1:0] regfile_out1,regfile_out2;
+    wire [Data_Width-1:0]regfile_out1;
+    wire [Data_Width-1:0]regfile_out2;
+    wire [Data_Width-1:0]alu_in2;
+    wire [Data_Width-1:0]alu_out;
+    wire [Data_Width-1:0]data_mem_out;
+    wire [Data_Width-1:0]write_back_data;
 
     //Sign extending the 16 bit immediate
     Sign_Extension_Unit #(
@@ -52,7 +58,7 @@ module MIPS_SC_Top (
     Mux2 #(
         .DW(Data_Width)
     )Branch_Mux(
-        .sel(control_sigs.signals.branch & ),//add zero flag
+        .sel(control_sigs.signals.branch & zero),//add zero flag
         .in_0(incremented_pc),
         .in_1(branch_addr),
         .data_out(branch_mux_out)
@@ -118,8 +124,43 @@ module MIPS_SC_Top (
 		.RA1(rs),
 		.RA2(rt),
 		.WA(rtd),
-		.WD(),
+		.WD(write_back_data),
 		.RD1(regfile_out1),
 		.RD2(regfile_out2)
 	);
+
+    Mux2  #(
+        .DW(Data_Width)
+    )ALU_In_Mux(
+        .sel(control_sigs.signals.alu_in_sel),
+        .in_0(regfile_out2),
+        .in_1(se_imm),
+        .data_out(alu_in2)
+    );
+
+    MIPS_ALU ALU(
+        .alu_sel(control_sigs.alu_sel),
+        .data_in1(regfile_out1),
+        .data_in2(alu_in2),
+        .shamt(shamt),
+        .zero(zero),
+        .data_out(alu_out)
+    );
+
+    MIPS_Data_Rom DM(
+        .clk(clk),
+        .we(control_sigs.signals.dmwe),
+        .addr(alu_out),
+        .data_in(regfile_out2), 
+        .data_out(data_mem_out) 
+    );
+
+    Mux2  #(
+        .DW(Data_Width)
+    )WB_Mux(
+        .sel(mem_to_rf_sel),
+        .in_0(alu_out),
+        .in_1(data_mem_out),
+        .data_out(write_back_data)
+    );
 endmodule
