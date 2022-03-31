@@ -18,7 +18,7 @@ module MIPS_SC_Top (
     mips_instruction_t mips_instruction;
     opcode_t opcode;
     function_t funct;
-    rfa_t rs,rt,rd;
+    rfa_t rs,rt,rd,rtd;
     wire [4:0]shamt;
     wire [15:0]imm;
     wire [25:0]jump_target;
@@ -32,6 +32,11 @@ module MIPS_SC_Top (
     alias mips_instruction.r_type_instruction.shamt=shamt;
     alias mips_instruction.i_type_instruction.imm=imm;
     alias mips_instruction.j_type_instruction.jump_target=jump_target;
+
+    //Control signals
+    control_signals_t control_sigs;
+
+    wire [Data_Width-1:0] regfile_out1,regfile_out2;
 
     //Sign extending the 16 bit immediate
     Sign_Extension_Unit #(
@@ -47,7 +52,7 @@ module MIPS_SC_Top (
     Mux2 #(
         .DW(Data_Width)
     )Branch_Mux(
-        .sel(),
+        .sel(control_sigs.signals.branch & ),//add zero flag
         .in_0(incremented_pc),
         .in_1(branch_addr),
         .data_out(branch_mux_out)
@@ -55,7 +60,7 @@ module MIPS_SC_Top (
     Mux2 #(
         .DW(Data_Width)
     )Jump_Mux(
-        .sel(),
+        .sel(control_sigs.signals.jump),
         .in_0(branch_mux_out),
         .in_1({incremented_pc[31:26],jump_target}),
         .data_out(jump_mux_out)
@@ -92,4 +97,29 @@ module MIPS_SC_Top (
         .data_out(mips_instruction) 
     );
 
+    MIPS_Control_Unit CU(
+        .opcode(opcode),
+        .funct(funct),
+        .control_sigs(control_sigs)
+    );
+
+    Mux2  #(
+        .DW(5)
+    )RFD_Mux(
+        .sel(control_sigs.signals.rfd_sel),
+        .in_0(rt),
+        .in_1(rd),
+        .data_out(rtd)
+    );
+
+    MIPS_Register_File RF(
+		.clk(clk),
+		.wen(control_sigs.signals.rfwe),
+		.RA1(rs),
+		.RA2(rt),
+		.WA(rtd),
+		.WD(),
+		.RD1(regfile_out1),
+		.RD2(regfile_out2)
+	);
 endmodule
