@@ -24,14 +24,14 @@ module MIPS_SC_Top (
     wire [25:0]jump_target;
     wire [Data_Width-1:0] se_imm;
 
-    alias mips_instruction.r_type_instruction.opcode=opcode;
-    alias mips_instruction.r_type_instruction.funct=funct;
-    alias mips_instruction.r_type_instruction.rs=rs;
-    alias mips_instruction.r_type_instruction.rt=rt;
-    alias mips_instruction.r_type_instruction.rd=rd;
-    alias mips_instruction.r_type_instruction.shamt=shamt;
-    alias mips_instruction.i_type_instruction.imm=imm;
-    alias mips_instruction.j_type_instruction.jump_target=jump_target;
+    assign opcode=mips_instruction.r_type_instruction.opcode;
+    assign funct=mips_instruction.r_type_instruction.funct;
+    assign rs=mips_instruction.r_type_instruction.rs;
+    assign rt=mips_instruction.r_type_instruction.rt;
+    assign rd=mips_instruction.r_type_instruction.rd;
+    assign shamt=mips_instruction.r_type_instruction.shamt;
+    assign imm=mips_instruction.i_type_instruction.imm;
+    assign jump_target=mips_instruction.j_type_instruction.jump_target;
 
     //Control signals
     control_signals_t control_sigs;
@@ -86,7 +86,7 @@ module MIPS_SC_Top (
         .DW(Data_Width)
     )PC_Inc(
         .in_1(current_pc),
-        .in_2(Data_Width'd1),
+        .in_2(32'd1),
         .data_out(incremented_pc)
     );
 

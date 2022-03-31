@@ -1,6 +1,7 @@
 //Header: `include "MIPS_SC_Definitions.pkg"
 `ifndef MIPS_SC_PKG
     `define MIPS_SC_PKG
+    
     package MIPS_SC_Definitions;
 
     //including the generic mips definitions

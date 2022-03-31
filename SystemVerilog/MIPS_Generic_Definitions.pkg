@@ -11,10 +11,10 @@
     localparam Instruction_Width=32;
     localparam Instruction_Mem_Addr_Width=8;
     localparam Instruction_Mem_Depth=2**Instruction_Mem_Addr_Width;
-    localparam Instruction_Mem_init = "Instructions.txt";
+    localparam Instruction_Mem_init = "MachineCode_Bin.txt";
     localparam Data_Mem_Addr_Width=10;
     localparam Data_Mem_Depth=2**Data_Mem_Addr_Width;
-    localparam Data_Mem_init = "Data.txt";
+    localparam Data_Mem_init = "MachineCode_Bin.txt";
     localparam Register_File_Mode =0;
 
     typedef logic [4:0] rfa_t;
