@@ -14,7 +14,7 @@ MIPS_Opcode_Decoder Inst_Name (
 
 module MIPS_Opcode_Decoder(
 input opcode_t opcode,
-output opcode_decoder_signal_t control_sigs,
+output control_signals_t control_sigs,
 output alu_op_t alu_op
 );
 

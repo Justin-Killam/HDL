@@ -20,7 +20,7 @@
         logic dmwe;
         logic mem_to_rf_sel;
         logic jump;
-    }opcode_decoder_signal_t;
+    }control_signals_t;
     
     //Parameters for the opcode decoder signal outputs
     localparam R_Type_Signals = 7'b1100000;
@@ -30,12 +30,6 @@
     localparam ADDI_Signals = 7'b1010000;
     localparam J_Signals = 7'b0000001;
     localparam ERR_Signals= 7'dx;
-
-    //Packed struct to unify the control unit outputs
-    typedef struct packed{
-        opcode_decoder_signal_t signals;
-        alu_sel_t alu_sel;
-    } control_signals_t;
     
     /**************************************************************/
     endpackage

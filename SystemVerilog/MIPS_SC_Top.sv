@@ -35,6 +35,7 @@ module MIPS_SC_Top (
 
     //Control signals
     control_signals_t control_sigs;
+    alu_sel_t alu_sel;
     wire zero;
 
     wire [Data_Width-1:0]regfile_out1;
@@ -58,7 +59,7 @@ module MIPS_SC_Top (
     Mux2 #(
         .DW(Data_Width)
     )Branch_Mux(
-        .sel(control_sigs.signals.branch & zero),//add zero flag
+        .sel(control_sigs.branch & zero),//add zero flag
         .in_0(incremented_pc),
         .in_1(branch_addr),
         .data_out(branch_mux_out)
@@ -66,7 +67,7 @@ module MIPS_SC_Top (
     Mux2 #(
         .DW(Data_Width)
     )Jump_Mux(
-        .sel(control_sigs.signals.jump),
+        .sel(control_sigs.jump),
         .in_0(branch_mux_out),
         .in_1({incremented_pc[31:26],jump_target}),
         .data_out(jump_mux_out)
@@ -106,13 +107,14 @@ module MIPS_SC_Top (
     MIPS_Control_Unit CU(
         .opcode(opcode),
         .funct(funct),
-        .control_sigs(control_sigs)
+        .control_sigs(control_sigs),
+        .alu_sel(alu_sel)
     );
 
     Mux2  #(
         .DW(5)
     )RFD_Mux(
-        .sel(control_sigs.signals.rfd_sel),
+        .sel(control_sigs.rfd_sel),
         .in_0(rt),
         .in_1(rd),
         .data_out(rtd)
@@ -120,7 +122,7 @@ module MIPS_SC_Top (
 
     MIPS_Register_File RF(
 		.clk(clk),
-		.wen(control_sigs.signals.rfwe),
+		.wen(control_sigs.rfwe),
 		.RA1(rs),
 		.RA2(rt),
 		.WA(rtd),
@@ -132,14 +134,14 @@ module MIPS_SC_Top (
     Mux2  #(
         .DW(Data_Width)
     )ALU_In_Mux(
-        .sel(control_sigs.signals.alu_in_sel),
+        .sel(control_sigs.alu_in_sel),
         .in_0(regfile_out2),
         .in_1(se_imm),
         .data_out(alu_in2)
     );
 
     MIPS_ALU ALU(
-        .alu_sel(control_sigs.alu_sel),
+        .alu_sel(alu_sel),
         .data_in1(regfile_out1),
         .data_in2(alu_in2),
         .shamt(shamt),
@@ -149,7 +151,7 @@ module MIPS_SC_Top (
 
     MIPS_Data_Rom DM(
         .clk(clk),
-        .we(control_sigs.signals.dmwe),
+        .we(control_sigs.dmwe),
         .addr(alu_out),
         .data_in(regfile_out2), 
         .data_out(data_mem_out) 
@@ -158,7 +160,7 @@ module MIPS_SC_Top (
     Mux2  #(
         .DW(Data_Width)
     )WB_Mux(
-        .sel(mem_to_rf_sel),
+        .sel(control_sigs.mem_to_rf_sel),
         .in_0(alu_out),
         .in_1(data_mem_out),
         .data_out(write_back_data)
