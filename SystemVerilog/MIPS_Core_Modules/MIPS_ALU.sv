@@ -12,7 +12,8 @@ MIPS_ALU Inst_Name(
 
 */
 
-`include "/../Packages/MIPS_Generic_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 
 module MIPS_ALU(
     input alu_sel_t alu_sel,

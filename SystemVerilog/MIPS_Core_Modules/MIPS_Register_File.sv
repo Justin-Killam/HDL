@@ -44,8 +44,8 @@ Module Instantiation Skeleton:
 		.RD2()
 	);
 */
-
-`include "/../Packages/MIPS_Generic_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 
 module MIPS_Register_File(
     input clk,

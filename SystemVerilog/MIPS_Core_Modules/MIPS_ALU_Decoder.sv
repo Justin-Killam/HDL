@@ -9,7 +9,8 @@ Module Instantiation Skeleton:
     );
 
 */
-`include "/../Packages/MIPS_Generic_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 
 module MIPS_ALU_Decoder (
 input alu_op_t alu_op,

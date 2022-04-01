@@ -7,8 +7,8 @@ MIPS_Instruction_Rom Inst_Name(
 );
 */
 
-
-`include "/../Packages/MIPS_Generic_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 
 module MIPS_Instruction_Rom (
     input [Instruction_Mem_Addr_Width-1:0] r_addr,
@@ -16,7 +16,7 @@ module MIPS_Instruction_Rom (
 );
     
     logic [Instruction_Width-1:0] instruction_rom [0:Instruction_Mem_Depth-1];
-    initial $readmemb(Instruction_Mem_init,instruction_rom);
+    initial $readmemb(`Inst_Init,instruction_rom);
 
     always_comb begin
         data_out=instruction_rom[r_addr];

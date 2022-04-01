@@ -1,6 +1,7 @@
 `timescale 1ns/10ps
-
-`include "/../Packages/MIPS_SC_Definitions.pkg"
+`define SC 1
+`include "MIPS_Proc_File_Paths.svh"
+`include `Specific_Pkg
 
 module MIPS_SC_Top (
     input clk,

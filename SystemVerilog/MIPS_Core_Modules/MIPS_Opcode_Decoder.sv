@@ -9,8 +9,8 @@ MIPS_Opcode_Decoder Inst_Name (
 );
 
 */
-
-`include "/../Packages/MIPS_SC_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Specific_Pkg
 
 module MIPS_Opcode_Decoder(
 input opcode_t opcode,

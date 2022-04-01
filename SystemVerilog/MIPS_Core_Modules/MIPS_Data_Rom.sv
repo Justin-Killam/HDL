@@ -11,8 +11,8 @@ MIPS_Data_Rom Inst_Name(
 
 */
 
-
-`include "/../Packages/MIPS_Generic_Definitions.pkg"
+`include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 
 module MIPS_Data_Rom (
     input clk,
@@ -23,7 +23,7 @@ module MIPS_Data_Rom (
 );
 
     logic [Data_Width-1:0] data_rom [0:Data_Mem_Depth-1];
-    initial $readmemb(Data_Mem_init,data_rom);
+    initial $readmemb(`Data_Init,data_rom);
     always_ff @(posedge clk)begin
         if(we)data_rom[addr]<=data_in;
     end
