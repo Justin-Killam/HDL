@@ -11,7 +11,7 @@
     localparam Instruction_Width=32;
     localparam Instruction_Mem_Addr_Width=8;
     localparam Instruction_Mem_Depth=2**Instruction_Mem_Addr_Width;
-    localparam Data_Mem_Addr_Width=10;
+    localparam Data_Mem_Addr_Width=9;
     localparam Data_Mem_Depth=2**Data_Mem_Addr_Width;
     localparam Register_File_Mode =0;
 

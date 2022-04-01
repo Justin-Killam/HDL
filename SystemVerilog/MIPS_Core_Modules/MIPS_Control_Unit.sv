@@ -22,6 +22,7 @@ MIPS_Control_Unit Inst_Name(
     );
 */
 `include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 `include `Specific_Pkg
 module MIPS_Control_Unit (
     input opcode_t opcode,

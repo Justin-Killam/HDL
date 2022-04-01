@@ -10,6 +10,7 @@ MIPS_Opcode_Decoder Inst_Name (
 
 */
 `include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 `include `Specific_Pkg
 
 module MIPS_Opcode_Decoder(

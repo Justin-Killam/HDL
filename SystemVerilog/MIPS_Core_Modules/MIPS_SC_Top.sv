@@ -1,6 +1,7 @@
 `timescale 1ns/10ps
 `define SC 1
 `include "MIPS_Proc_File_Paths.svh"
+`include `Generic_Pkg
 `include `Specific_Pkg
 
 module MIPS_SC_Top (
