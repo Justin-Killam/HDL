@@ -8,7 +8,7 @@ MIPS_Instruction_Rom Inst_Name(
 */
 
 
-`include "MIPS_Generic_Definitions.pkg"
+`include "/../Packages/MIPS_Generic_Definitions.pkg"
 
 module MIPS_Instruction_Rom (
     input [Instruction_Mem_Addr_Width-1:0] r_addr,

@@ -12,7 +12,7 @@ MIPS_ALU Inst_Name(
 
 */
 
-`include "MIPS_Generic_Definitions.pkg"
+`include "/../Packages/MIPS_Generic_Definitions.pkg"
 
 module MIPS_ALU(
     input alu_sel_t alu_sel,

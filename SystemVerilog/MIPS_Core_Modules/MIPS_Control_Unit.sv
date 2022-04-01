@@ -21,7 +21,7 @@ MIPS_Control_Unit Inst_Name(
     .control_sigs()
     );
 */
-`include "MIPS_SC_Definitions.pkg"
+`include "/../Packages/MIPS_SC_Definitions.pkg"
 module MIPS_Control_Unit (
     input opcode_t opcode,
     input function_t funct,

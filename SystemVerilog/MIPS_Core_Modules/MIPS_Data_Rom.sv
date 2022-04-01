@@ -12,7 +12,7 @@ MIPS_Data_Rom Inst_Name(
 */
 
 
-`include "MIPS_Generic_Definitions.pkg"
+`include "/../Packages/MIPS_Generic_Definitions.pkg"
 
 module MIPS_Data_Rom (
     input clk,

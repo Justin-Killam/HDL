@@ -1,6 +1,6 @@
 `timescale 1ns/10ps
 
-`include "MIPS_SC_Definitions.pkg"
+`include "/../Packages/MIPS_SC_Definitions.pkg"
 
 module MIPS_SC_Top (
     input clk,

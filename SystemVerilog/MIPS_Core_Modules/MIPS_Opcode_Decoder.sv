@@ -10,7 +10,7 @@ MIPS_Opcode_Decoder Inst_Name (
 
 */
 
-`include "MIPS_SC_Definitions.pkg"
+`include "/../Packages/MIPS_SC_Definitions.pkg"
 
 module MIPS_Opcode_Decoder(
 input opcode_t opcode,

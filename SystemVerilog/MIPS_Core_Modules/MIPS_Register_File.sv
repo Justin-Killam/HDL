@@ -45,7 +45,7 @@ Module Instantiation Skeleton:
 	);
 */
 
-`include "MIPS_Generic_Definitions.pkg"
+`include "/../Packages/MIPS_Generic_Definitions.pkg"
 
 module MIPS_Register_File(
     input clk,

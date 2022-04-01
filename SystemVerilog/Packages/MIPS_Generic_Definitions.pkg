@@ -11,10 +11,10 @@
     localparam Instruction_Width=32;
     localparam Instruction_Mem_Addr_Width=8;
     localparam Instruction_Mem_Depth=2**Instruction_Mem_Addr_Width;
-    localparam Instruction_Mem_init = "C:/Users/Justin Killam/Documents/Git_Local/MIPS_Encoder/MachineCode_Bin.txt";
+    localparam Instruction_Mem_init = "/../../Init_Files/MIPS_Inst_E_Bin.txt";
     localparam Data_Mem_Addr_Width=10;
     localparam Data_Mem_Depth=2**Data_Mem_Addr_Width;
-    localparam Data_Mem_init = "D:/VivadoFiles/Vivado_Assginments/Single_Cycle_v2019_1/Single_Cycle_v2019_1.srcs/sim_1/new/DM_init.mem";
+    localparam Data_Mem_init = "/../../Init_Files/MIPS_Data_Init.txt";
     localparam Register_File_Mode =0;
 
     typedef logic [4:0] rfa_t;
