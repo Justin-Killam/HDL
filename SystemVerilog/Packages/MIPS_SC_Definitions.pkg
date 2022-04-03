@@ -15,7 +15,7 @@
         logic dmwe;
         logic mem_to_rf_sel;
         logic jump;
-    }control_signals_t;
+    }control_signals_t;//7 bits
     
     //Parameters for the opcode decoder signal outputs
     localparam R_Type_Signals = 7'b1100000;

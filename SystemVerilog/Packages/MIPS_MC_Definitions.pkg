@@ -1,0 +1,59 @@
+//Header: `include "MIPS_MC_Definitions.pkg"
+`ifndef MIPS_MC_PKG
+    `define MIPS_MC_PKG
+    package MIPS_MC_Definitions;
+
+    /*            Architecture Specific Definitions               */
+    /**************************************************************/
+    
+    tpedef enum logic [3:0]{
+        S_Fetch,
+        S_Decode,
+        S_MemAdr,
+        S_MemR,
+        S_MemWB,
+        S_DMW,
+        S_Exec,
+        S_ALUWB,
+        S_Branch,
+        S_Jump,
+        S_AddIEX,
+        S_AddIWB,
+        S_ERR=4'dx
+    }state_var_t;
+
+
+    //Opcode decoder signal packed structure defined data type
+    typedef struct packed{
+        logic mem_to_rf_sel;
+        logic rfd_sel;
+        logic id_sel;
+        logic [1:0]pc_sel;
+        logic [1:0]alu_in2_sel;
+        logic alu_in1_sel;
+        logic irwe;
+        logic dmwe;
+        logic pcwe;
+        logic branch;
+        logic rfwe;
+    }control_signals_t;//13 bits
+    
+    //Parameters for the opcode decoder signal outputs
+    localparam S_Fetch_Signals=13'bxx00001010100;
+    localparam S_Decode_Signals=13'bxxxxx10000000;
+    localparam S_MemAdr_Signals=13'bxxxxx10100000;
+    localparam S_MemR_Signals=13'bxx1xxxxx00000;
+    localparam S_MemWB_Signals=13'b10xxxxxx00001;
+    localparam S_DMW_Signals=13'bxx1xxxxx01000;
+    localparam S_Exec_Signals=13'bxxxxx00100000;
+    localparam S_ALUWB_Signals=13'b01xxxxxx00001;
+    localparam S_Branch_Signals=13'bxxx0100100010;
+    localparam S_Jump_Signals=13'bxxx10xxx00100;
+    localparam S_AddIEX_Signals=13'bxxxxx10100000;
+    localparam S_AddIWB_Signals=13'b00xxxxxx00001;
+    localparam S_ERR_Signals= 13'dx;
+    
+    /**************************************************************/
+    endpackage
+    import MIPS_MC_Definitions :: *;
+`endif
